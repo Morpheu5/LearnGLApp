@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A30C65ED275BB9DD002679A8 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = A30C65EC275BB9C7002679A8 /* resources */; };
+		A30C65F0275BBA9F002679A8 /* LearnGLApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A30C65EE275BBA9F002679A8 /* LearnGLApp.cpp */; };
+		A326CF38275B6F7B00D75E1A /* gl.c in Sources */ = {isa = PBXBuildFile; fileRef = A37EC175275ACB3E00C727C8 /* gl.c */; };
+		A37EC178275ACB3E00C727C8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A37EC176275ACB3E00C727C8 /* main.cpp */; };
+		A3CDDA47275ABFAA00DCBF29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A30C65EC275BB9C7002679A8 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = resources; path = learngl/resources; sourceTree = "<group>"; };
+		A30C65EE275BBA9F002679A8 /* LearnGLApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LearnGLApp.cpp; sourceTree = "<group>"; };
+		A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LearnGLApp.hpp; sourceTree = "<group>"; };
+		A37EC171275ACB3100C727C8 /* khrplatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = khrplatform.h; sourceTree = "<group>"; };
+		A37EC173275ACB3100C727C8 /* gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
+		A37EC175275ACB3E00C727C8 /* gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl.c; sourceTree = "<group>"; };
+		A37EC176275ACB3E00C727C8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A3CDDA40275ABFA800DCBF29 /* learngl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learngl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3CDDA4D275ABFAA00DCBF29 /* learngl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learngl.entitlements; sourceTree = "<group>"; };
+		A3CDDA53275AC0F900DCBF29 /* conanfile.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = conanfile.txt; path = learngl/conanfile.txt; sourceTree = "<group>"; };
+		A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conandeps.xcconfig; path = learngl/conanbuild/conandeps.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5A275AC4F500DCBF29 /* conan_opengl_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_debug_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_debug_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5B275AC4F500DCBF29 /* conan_opengl.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl.xcconfig; path = learngl/conanbuild/conan_opengl.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5C275AC4F500DCBF29 /* conan_glfw_vars_release_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_vars_release_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_vars_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5D275AC4F500DCBF29 /* conan_glfw.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw.xcconfig; path = learngl/conanbuild/conan_glfw.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5E275AC4F500DCBF29 /* conan_glfw_release_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_release_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA5F275AC4F500DCBF29 /* conan_opengl_release_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_release_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA60275AC4F500DCBF29 /* conan_opengl_vars_release_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_vars_release_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_vars_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA61275AC4F500DCBF29 /* conan_glfw_vars_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_vars_debug_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_vars_debug_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA62275AC4F500DCBF29 /* conan_glfw_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_debug_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_debug_arm64.xcconfig; sourceTree = "<group>"; };
+		A3CDDA63275AC4F500DCBF29 /* conan_opengl_vars_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_vars_debug_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_vars_debug_arm64.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3CDDA3D275ABFA800DCBF29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A37EC16F275ACB3100C727C8 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */,
+				A37EC170275ACB3100C727C8 /* KHR */,
+				A37EC172275ACB3100C727C8 /* glad */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		A37EC170275ACB3100C727C8 /* KHR */ = {
+			isa = PBXGroup;
+			children = (
+				A37EC171275ACB3100C727C8 /* khrplatform.h */,
+			);
+			path = KHR;
+			sourceTree = "<group>";
+		};
+		A37EC172275ACB3100C727C8 /* glad */ = {
+			isa = PBXGroup;
+			children = (
+				A37EC173275ACB3100C727C8 /* gl.h */,
+			);
+			path = glad;
+			sourceTree = "<group>";
+		};
+		A37EC174275ACB3E00C727C8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				A37EC175275ACB3E00C727C8 /* gl.c */,
+				A37EC176275ACB3E00C727C8 /* main.cpp */,
+				A30C65EE275BBA9F002679A8 /* LearnGLApp.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		A37EC17A275ACF5400C727C8 /* conanstuff */ = {
+			isa = PBXGroup;
+			children = (
+				A3CDDA53275AC0F900DCBF29 /* conanfile.txt */,
+				A3CDDA62275AC4F500DCBF29 /* conan_glfw_debug_arm64.xcconfig */,
+				A3CDDA5E275AC4F500DCBF29 /* conan_glfw_release_arm64.xcconfig */,
+				A3CDDA61275AC4F500DCBF29 /* conan_glfw_vars_debug_arm64.xcconfig */,
+				A3CDDA5C275AC4F500DCBF29 /* conan_glfw_vars_release_arm64.xcconfig */,
+				A3CDDA5D275AC4F500DCBF29 /* conan_glfw.xcconfig */,
+				A3CDDA5A275AC4F500DCBF29 /* conan_opengl_debug_arm64.xcconfig */,
+				A3CDDA5F275AC4F500DCBF29 /* conan_opengl_release_arm64.xcconfig */,
+				A3CDDA63275AC4F500DCBF29 /* conan_opengl_vars_debug_arm64.xcconfig */,
+				A3CDDA60275AC4F500DCBF29 /* conan_opengl_vars_release_arm64.xcconfig */,
+				A3CDDA5B275AC4F500DCBF29 /* conan_opengl.xcconfig */,
+				A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */,
+			);
+			name = conanstuff;
+			sourceTree = "<group>";
+		};
+		A3CDDA37275ABFA800DCBF29 = {
+			isa = PBXGroup;
+			children = (
+				A30C65EC275BB9C7002679A8 /* resources */,
+				A37EC17A275ACF5400C727C8 /* conanstuff */,
+				A3CDDA42275ABFA800DCBF29 /* learngl */,
+				A3CDDA41275ABFA800DCBF29 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3CDDA41275ABFA800DCBF29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3CDDA40275ABFA800DCBF29 /* learngl.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3CDDA42275ABFA800DCBF29 /* learngl */ = {
+			isa = PBXGroup;
+			children = (
+				A37EC174275ACB3E00C727C8 /* src */,
+				A37EC16F275ACB3100C727C8 /* include */,
+				A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */,
+				A3CDDA4D275ABFAA00DCBF29 /* learngl.entitlements */,
+			);
+			path = learngl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3CDDA3F275ABFA800DCBF29 /* learngl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3CDDA50275ABFAA00DCBF29 /* Build configuration list for PBXNativeTarget "learngl" */;
+			buildPhases = (
+				A3CDDA3C275ABFA800DCBF29 /* Sources */,
+				A3CDDA3D275ABFA800DCBF29 /* Frameworks */,
+				A3CDDA3E275ABFA800DCBF29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = learngl;
+			productName = learngl;
+			productReference = A3CDDA40275ABFA800DCBF29 /* learngl.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3CDDA38275ABFA800DCBF29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					A3CDDA3F275ABFA800DCBF29 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = A3CDDA3B275ABFA800DCBF29 /* Build configuration list for PBXProject "learngl" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3CDDA37275ABFA800DCBF29;
+			productRefGroup = A3CDDA41275ABFA800DCBF29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3CDDA3F275ABFA800DCBF29 /* learngl */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3CDDA3E275ABFA800DCBF29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30C65ED275BB9DD002679A8 /* resources in Resources */,
+				A3CDDA47275ABFAA00DCBF29 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3CDDA3C275ABFA800DCBF29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A326CF38275B6F7B00D75E1A /* gl.c in Sources */,
+				A30C65F0275BBA9F002679A8 /* LearnGLApp.cpp in Sources */,
+				A37EC178275ACB3E00C727C8 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A3CDDA4E275ABFAA00DCBF29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/learngl/include";
+			};
+			name = Debug;
+		};
+		A3CDDA4F275ABFAA00DCBF29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/learngl/include";
+			};
+			name = Release;
+		};
+		A3CDDA51275ABFAA00DCBF29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					arm64,
+					"$(_ARCHS_STANDARD)",
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = learngl/learngl.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4P5WJRFVXA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.morpheu5.learngl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		A3CDDA52275ABFAA00DCBF29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					arm64,
+					"$(_ARCHS_STANDARD)",
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = learngl/learngl.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4P5WJRFVXA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.morpheu5.learngl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3CDDA3B275ABFA800DCBF29 /* Build configuration list for PBXProject "learngl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3CDDA4E275ABFAA00DCBF29 /* Debug */,
+				A3CDDA4F275ABFAA00DCBF29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3CDDA50275ABFAA00DCBF29 /* Build configuration list for PBXNativeTarget "learngl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3CDDA51275ABFAA00DCBF29 /* Debug */,
+				A3CDDA52275ABFAA00DCBF29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3CDDA38275ABFA800DCBF29 /* Project object */;
+}
