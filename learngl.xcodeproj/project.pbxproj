@@ -22,6 +22,7 @@
 		A37EC173275ACB3100C727C8 /* gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
 		A37EC175275ACB3E00C727C8 /* gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl.c; sourceTree = "<group>"; };
 		A37EC176275ACB3E00C727C8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseApp.hpp; sourceTree = "<group>"; };
 		A3CDDA40275ABFA800DCBF29 /* learngl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learngl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3CDDA4D275ABFAA00DCBF29 /* learngl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learngl.entitlements; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 				A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */,
 				A37EC170275ACB3100C727C8 /* KHR */,
 				A37EC172275ACB3100C727C8 /* glad */,
+				A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";

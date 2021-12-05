@@ -6,17 +6,14 @@
 #include "glad/gl.h"
 #include <GLFW/glfw3.h>
 
-class LearnGLApp {
-    GLFWwindow *_window;
+#include "BaseApp.hpp"
 
+class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
 
 public:
     virtual void setup();
     virtual void run();
-
-    void setWindow(GLFWwindow *window) { _window = window; }
-    GLFWwindow *window() { return _window; }
 
     virtual void resize(int width, int height) {
         glViewport(0, 0, width, height);

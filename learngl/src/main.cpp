@@ -8,11 +8,12 @@
 #include "LearnGLApp.hpp"
 
 template <class T>
-GLFWwindow *makeWindow(T *userWindow, int width, int height, const char *title) {
+void makeWindow(T *userWindow, int width, int height, const char *title) {
     GLFWwindow *glfwWindow = glfwCreateWindow(width, height, title, nullptr, nullptr);
     if (glfwWindow == nullptr) {
         throw std::runtime_error("Failed to create a GLFW window");
     }
+    static_cast<BaseApp *>(userWindow)->window(glfwWindow);
 
     glfwMakeContextCurrent(glfwWindow);
     if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
@@ -24,8 +25,6 @@ GLFWwindow *makeWindow(T *userWindow, int width, int height, const char *title) 
 
     auto _resize = [](GLFWwindow *w, int width, int height) { static_cast<T *>(glfwGetWindowUserPointer(w))->resize(width, height); };
     glfwSetFramebufferSizeCallback(glfwWindow, _resize);
-
-    return glfwWindow;
 }
 
 int main(int argc, const char * argv[]) {
@@ -42,7 +41,7 @@ int main(int argc, const char * argv[]) {
 
     LearnGLApp app;
     try {
-        app.setWindow(makeWindow(&app, 800, 600, "LearnGL"));
+        makeWindow(&app, 800, 600, "LearnGL");
     } catch(std::runtime_error e) {
         std::cerr << e.what() << std::endl;
         return -1;
