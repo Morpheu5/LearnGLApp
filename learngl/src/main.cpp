@@ -7,26 +7,6 @@
 
 #include "LearnGLApp.hpp"
 
-template <class T>
-void makeWindow(T *userWindow, int width, int height, const char *title) {
-    GLFWwindow *glfwWindow = glfwCreateWindow(width, height, title, nullptr, nullptr);
-    if (glfwWindow == nullptr) {
-        throw std::runtime_error("Failed to create a GLFW window");
-    }
-    static_cast<BaseApp *>(userWindow)->window(glfwWindow);
-
-    glfwMakeContextCurrent(glfwWindow);
-    if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
-        throw std::runtime_error("Failed to initialize GLAD");
-    }
-    glViewport(0, 0, width, height);
-
-    glfwSetWindowUserPointer(glfwWindow, userWindow);
-
-    auto _resize = [](GLFWwindow *w, int width, int height) { static_cast<T *>(glfwGetWindowUserPointer(w))->resize(width, height); };
-    glfwSetFramebufferSizeCallback(glfwWindow, _resize);
-}
-
 int main(int argc, const char * argv[]) {
     /* Initialize the library */
     if (glfwInit() != GLFW_TRUE) {

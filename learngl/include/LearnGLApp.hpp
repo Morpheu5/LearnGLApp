@@ -3,9 +3,6 @@
 
 #include <vector>
 
-#include "glad/gl.h"
-#include <GLFW/glfw3.h>
-
 #include "BaseApp.hpp"
 
 class LearnGLApp : public BaseApp {
@@ -24,4 +21,4 @@ public:
     virtual ~LearnGLApp();
 };
 
-#endif /* LearnGLApp_hpp */
+#endif
