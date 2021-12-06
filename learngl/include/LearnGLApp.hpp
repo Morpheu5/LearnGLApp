@@ -8,6 +8,9 @@
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
 
+    unsigned int triangleVBO;
+    unsigned int vertexShader;
+
 public:
     virtual void setup();
     virtual void run();

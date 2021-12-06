@@ -3,7 +3,21 @@
 #include <stdexcept>
 
 void LearnGLApp::setup() {
+    // Let's make a triangle
+    vertices = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f
+    };
 
+    glGenBuffers(1, &triangleVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
+
+    const char *vertexShaderCode = readFile("resources/shaders/shader.vert").data();
+    std::cout << vertexShaderCode << std::endl;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderCode, nullptr);
 }
 
 void LearnGLApp::run() {
