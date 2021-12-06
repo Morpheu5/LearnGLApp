@@ -27,7 +27,7 @@ public:
         file.read(buffer->data(), fileSize);
         file.close();
 
-        return buffer;
+        return buffer->data();
     }
 };
 
