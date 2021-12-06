@@ -22,9 +22,9 @@ public:
         }
 
         unsigned long long fileSize = (unsigned long long) file.tellg();
-        std::vector<char> buffer(fileSize);
+        std::vector<char> *buffer = new std::vector<char>(fileSize);
         file.seekg(0);
-        file.read(buffer.data(), fileSize);
+        file.read(buffer->data(), fileSize);
         file.close();
 
         return buffer;

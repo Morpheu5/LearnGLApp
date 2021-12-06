@@ -14,8 +14,7 @@ void LearnGLApp::setup() {
     glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
     glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
-    const char *vertexShaderCode = readFile("resources/shaders/shader.vert").data();
-    std::cout << vertexShaderCode << std::endl;
+    auto vertexShaderCode = readFile("resources/shaders/shader.vert")->data();
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderCode, nullptr);
 }
