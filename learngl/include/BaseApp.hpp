@@ -4,12 +4,31 @@
 #include "glad/gl.h"
 #include <GLFW/glfw3.h>
 
+#include <stdexcept>
+#include <string>
+#include <fstream>
+
 class BaseApp {
 protected:
     GLFWwindow *_window = nullptr;
 public:
     void window(GLFWwindow *window) { _window = window; }
     GLFWwindow *window() { return _window; }
+
+    auto readFile(const std::string &filename) {
+        std::ifstream file(filename, std::ios::ate | std::ios::binary);
+        if (!file.is_open()) {
+            throw std::runtime_error("Failed to read file (" + filename + ").");
+        }
+
+        unsigned long long fileSize = (unsigned long long) file.tellg();
+        std::vector<char> buffer(fileSize);
+        file.seekg(0);
+        file.read(buffer.data(), fileSize);
+        file.close();
+
+        return buffer;
+    }
 };
 
 template <class T>
