@@ -11,8 +11,8 @@ void LearnGLApp::setup() {
     // Use shader program
     glUseProgram(shaderProgram);
     // Clean up the shaders
-//    glDeleteShader(vertexShader);
-//    glDeleteShader(fragmentShader);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
 
     // Let's make a triangle
     vertices = {
