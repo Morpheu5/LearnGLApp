@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <string>
 #include <fstream>
+#include <iostream>
 
 class BaseApp {
 protected:
@@ -16,18 +17,19 @@ public:
     GLFWwindow *window() { return _window; }
 
     auto readFile(const std::string &filename) {
-        std::ifstream file(filename, std::ios::ate | std::ios::binary);
+        std::ifstream file(filename, std::ios::binary | std::ios::ate);
         if (!file.is_open()) {
             throw std::runtime_error("Failed to read file (" + filename + ").");
         }
 
         unsigned long long fileSize = (unsigned long long) file.tellg();
-        std::vector<char> *buffer = new std::vector<char>(fileSize);
-        file.seekg(0);
-        file.read(buffer->data(), fileSize);
+        char *memblock = new char[fileSize+1];
+        file.seekg(0, std::ios::beg);
+        file.read(memblock, fileSize);
         file.close();
+        memblock[fileSize] = 0;
 
-        return buffer->data();
+        return memblock;
     }
 };
 

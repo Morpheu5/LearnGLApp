@@ -10,6 +10,9 @@ class LearnGLApp : public BaseApp {
 
     unsigned int triangleVBO;
     unsigned int vertexShader;
+    unsigned int fragmentShader;
+    unsigned int shaderProgram;
+    unsigned int VAO;
 
 public:
     virtual void setup();
@@ -20,6 +23,51 @@ public:
     }
 
     virtual void processInput();
+
+    unsigned int createShaderFromFile(unsigned int shaderType, const char* const filename) {
+        // Load the shader code from file
+        auto shaderCode = readFile(filename);
+        
+        // Create the shader object
+        unsigned int shaderObject = glCreateShader(shaderType);
+        // Attach the shader code to the shader object
+        glShaderSource(shaderObject, 1, &shaderCode, nullptr);
+        // Compile the shader
+        glCompileShader(shaderObject);
+        // Check if the compilation was successful
+        int success;
+        char infoLog[512];
+        glGetShaderiv(shaderObject, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(shaderObject, 512, nullptr, infoLog);
+            std::string message = "Vertex shader compilation failed\n";
+            message.append(infoLog);
+            throw std::runtime_error(message);
+        }
+        // Return the shader's handler
+        return shaderObject;
+    }
+
+    unsigned int createShaderProgram(std::vector<unsigned int> shaders) {
+        unsigned int program = glCreateProgram();
+        for (unsigned int i = 0; i < shaders.size(); ++i) {
+            auto shader = shaders[i];
+            glAttachShader(program, shader);
+        }
+        glLinkProgram(program);
+        // Check that the shader program was created correctly
+        int success;
+        char infoLog[512];
+        glGetProgramiv(program, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(program, 512, nullptr, infoLog);
+            std::string message = "Failed to create a shader program\n";
+            message.append(infoLog);
+            throw std::runtime_error(message);
+        }
+        // Return the program's handler
+        return program;
+    }
 
     virtual ~LearnGLApp();
 };
