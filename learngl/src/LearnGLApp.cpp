@@ -30,9 +30,9 @@ void LearnGLApp::setup() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
     // Create vertex array object
-    glGenVertexArrays(1, &VAO);
+    glGenVertexArrays(1, &triangleVAO);
     // Bind vertex array object
-    glBindVertexArray(VAO);
+    glBindVertexArray(triangleVAO);
 
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
@@ -58,7 +58,7 @@ void LearnGLApp::run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
+        glBindVertexArray(triangleVAO);
         glDrawArrays(GL_TRIANGLES, 0, 4);
 
         // Do the framebuffer swappy thing

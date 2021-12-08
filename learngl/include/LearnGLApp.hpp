@@ -12,7 +12,7 @@ class LearnGLApp : public BaseApp {
     unsigned int vertexShader;
     unsigned int fragmentShader;
     unsigned int shaderProgram;
-    unsigned int VAO;
+    unsigned int triangleVAO;
 
 public:
     virtual void setup();
