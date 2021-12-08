@@ -58,7 +58,7 @@ void LearnGLApp::run() {
 
         glUseProgram(shaderProgram);
         glBindVertexArray(triangleVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);
