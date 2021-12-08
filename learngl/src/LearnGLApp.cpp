@@ -21,18 +21,17 @@ void LearnGLApp::setup() {
          0.0f,  0.5f, 0.0f
     };
 
-    // Create vertex buffer object
-    glGenBuffers(1, &triangleVBO);
-    // Bind vertex buffer object
-    glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
-
-    // Set data for the vertex buffer object
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-
     // Create vertex array object
     glGenVertexArrays(1, &triangleVAO);
     // Bind vertex array object
     glBindVertexArray(triangleVAO);
+
+    // Create vertex buffer object
+    glGenBuffers(1, &triangleVBO);
+    // Bind vertex buffer object
+    glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+    // Set data for the vertex buffer object
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
