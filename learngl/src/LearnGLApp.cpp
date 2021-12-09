@@ -14,24 +14,36 @@ void LearnGLApp::setup() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    // Let's make a triangle
+    // Let's make a square
     vertices = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
+        0.5f,  0.5f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f,  // bottom right
+       -0.5f, -0.5f, 0.0f,  // bottom left
+       -0.5f,  0.5f, 0.0f,  // top left
+    };
+    indices = {
+        0, 1, 3,
+        1, 2, 3,
     };
 
     // Create vertex array object
-    glGenVertexArrays(1, &triangleVAO);
+    glGenVertexArrays(1, &squareVAO);
     // Bind vertex array object
-    glBindVertexArray(triangleVAO);
+    glBindVertexArray(squareVAO);
 
     // Create vertex buffer object
-    glGenBuffers(1, &triangleVBO);
+    glGenBuffers(1, &squareVBO);
     // Bind vertex buffer object
-    glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, squareVBO);
     // Set data for the vertex buffer object
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+
+    // Create the element buffer object
+    glGenBuffers(1, &squareEBO);
+    // Bind the element buffer object
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, squareEBO);
+    // Set the data for the element buffer object
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
@@ -57,8 +69,8 @@ void LearnGLApp::run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(triangleVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(squareVAO);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);

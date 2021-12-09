@@ -7,12 +7,15 @@
 
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
+    std::vector<unsigned int> indices;
 
-    unsigned int triangleVBO;
+    unsigned int squareVBO;
+    unsigned int squareVAO;
+    unsigned int squareEBO;
+
     unsigned int vertexShader;
     unsigned int fragmentShader;
     unsigned int shaderProgram;
-    unsigned int triangleVAO;
 
 public:
     virtual void setup();
