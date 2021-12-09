@@ -17,12 +17,14 @@ void LearnGLApp::setup() {
 
     // Let's make a square
     vertices = {
-        0.0f,  0.5f, 0.0f,  // top center
-        0.5f, -0.5f, 0.0f,  // bottom right
-       -0.5f, -0.5f, 0.0f,  // bottom left
+        // positions         // colors
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top
     };
     indices = {
         0, 1, 2,
+        3,4,5
     };
 
     // Create vertex array object
@@ -46,9 +48,12 @@ void LearnGLApp::setup() {
 
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     // The VBO is already registered so we can safely unbind here
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -77,7 +82,7 @@ void LearnGLApp::run() {
         glUniform4f(vertexColorLocation, value * 0.2f, value * 0.8f, value, 1.0f);
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);
