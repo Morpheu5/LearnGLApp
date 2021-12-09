@@ -38,6 +38,7 @@
 		A3CDDA61275AC4F500DCBF29 /* conan_glfw_vars_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_vars_debug_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_vars_debug_arm64.xcconfig; sourceTree = "<group>"; };
 		A3CDDA62275AC4F500DCBF29 /* conan_glfw_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_debug_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_debug_arm64.xcconfig; sourceTree = "<group>"; };
 		A3CDDA63275AC4F500DCBF29 /* conan_opengl_vars_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_vars_debug_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_vars_debug_arm64.xcconfig; sourceTree = "<group>"; };
+		A3F7571927628733000E7034 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 				A37EC170275ACB3100C727C8 /* KHR */,
 				A37EC172275ACB3100C727C8 /* glad */,
 				A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */,
+				A3F7571927628733000E7034 /* Shader.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";

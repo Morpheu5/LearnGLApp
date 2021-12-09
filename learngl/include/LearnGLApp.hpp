@@ -2,8 +2,10 @@
 #define LearnGLApp_hpp
 
 #include <vector>
+#include <memory>
 
 #include "BaseApp.hpp"
+#include "Shader.hpp"
 
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
@@ -13,9 +15,7 @@ class LearnGLApp : public BaseApp {
     unsigned int VAO;
     unsigned int EBO;
 
-    unsigned int vertexShader;
-    unsigned int fragmentShader;
-    unsigned int shaderProgram;
+    std::shared_ptr<Shader> shaderProgram;
 
 public:
     virtual void setup();

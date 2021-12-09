@@ -1,19 +1,13 @@
 #include "LearnGLApp.hpp"
+#include "Shader.hpp"
+
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
 
 void LearnGLApp::setup() {
-    // Compile the shaders
-    vertexShader = createShaderFromFile(GL_VERTEX_SHADER, "resources/shaders/shader.vert");
-    fragmentShader = createShaderFromFile(GL_FRAGMENT_SHADER, "resources/shaders/shader.frag");
-    // Create shader program
-    shaderProgram = createShaderProgram({ vertexShader, fragmentShader });
-    // Use shader program
-    glUseProgram(shaderProgram);
-    // Clean up the shaders
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    // Create the shader program
+    shaderProgram = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/shader.frag");
 
     // Let's make a square
     vertices = {
@@ -74,12 +68,11 @@ void LearnGLApp::run() {
 
         float timeValue = glfwGetTime();
         float value = (std::sin(timeValue) / 2.0f) + 0.5f;
-        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
 
         // Activate the shader
-        glUseProgram(shaderProgram);
+        shaderProgram->use();
         // Pass the color as a uniform
-        glUniform4f(vertexColorLocation, value * 0.2f, value * 0.8f, value, 1.0f);
+        shaderProgram->setVec4f("ourColor", { value * 0.2f, value * 0.8f, value, 1.0f });
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
