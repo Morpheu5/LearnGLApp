@@ -16,32 +16,30 @@ void LearnGLApp::setup() {
 
     // Let's make a square
     vertices = {
-        0.5f,  0.5f, 0.0f,  // top right
+        0.0f,  0.5f, 0.0f,  // top center
         0.5f, -0.5f, 0.0f,  // bottom right
        -0.5f, -0.5f, 0.0f,  // bottom left
-       -0.5f,  0.5f, 0.0f,  // top left
     };
     indices = {
-        0, 1, 3,
-        1, 2, 3,
+        0, 1, 2,
     };
 
     // Create vertex array object
-    glGenVertexArrays(1, &squareVAO);
+    glGenVertexArrays(1, &VAO);
     // Bind vertex array object
-    glBindVertexArray(squareVAO);
+    glBindVertexArray(VAO);
 
     // Create vertex buffer object
-    glGenBuffers(1, &squareVBO);
+    glGenBuffers(1, &VBO);
     // Bind vertex buffer object
-    glBindBuffer(GL_ARRAY_BUFFER, squareVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Set data for the vertex buffer object
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
     // Create the element buffer object
-    glGenBuffers(1, &squareEBO);
+    glGenBuffers(1, &EBO);
     // Bind the element buffer object
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, squareEBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     // Set the data for the element buffer object
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
@@ -69,7 +67,7 @@ void LearnGLApp::run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(squareVAO);
+        glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Do the framebuffer swappy thing

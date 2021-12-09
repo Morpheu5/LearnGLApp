@@ -9,9 +9,9 @@ class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
 
-    unsigned int squareVBO;
-    unsigned int squareVAO;
-    unsigned int squareEBO;
+    unsigned int VBO;
+    unsigned int VAO;
+    unsigned int EBO;
 
     unsigned int vertexShader;
     unsigned int fragmentShader;
