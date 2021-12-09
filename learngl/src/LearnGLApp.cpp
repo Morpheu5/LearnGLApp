@@ -1,6 +1,7 @@
 #include "LearnGLApp.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <cmath>
 
 void LearnGLApp::setup() {
     // Compile the shaders
@@ -66,7 +67,15 @@ void LearnGLApp::run() {
         glClearColor(0.2f, 0.3, 0.4f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        float timeValue = glfwGetTime();
+        float value = (std::sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+
+        // Activate the shader
         glUseProgram(shaderProgram);
+        // Pass the color as a uniform
+        glUniform4f(vertexColorLocation, value * 0.2f, value * 0.8f, value, 1.0f);
+
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
