@@ -1,3 +1,6 @@
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 #include "LearnGLApp.hpp"
 #include "Shader.hpp"
 
@@ -11,30 +14,31 @@ void LearnGLApp::setup() {
 
     // Let's make a square
     vertices = {
-        // positions         // colors
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top
+        // positions          // colors           // texture coords
+         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f,   // top left
     };
     indices = {
         0, 1, 2,
-        3,4,5
+        2, 3, 0
     };
 
     // Create vertex array object
     glGenVertexArrays(1, &VAO);
-    // Bind vertex array object
-    glBindVertexArray(VAO);
-
     // Create vertex buffer object
     glGenBuffers(1, &VBO);
+    // Create the element buffer object
+    glGenBuffers(1, &EBO);
+
+    // Bind vertex array object
+    glBindVertexArray(VAO);
     // Bind vertex buffer object
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Set data for the vertex buffer object
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
-    // Create the element buffer object
-    glGenBuffers(1, &EBO);
     // Bind the element buffer object
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     // Set the data for the element buffer object
@@ -43,11 +47,40 @@ void LearnGLApp::setup() {
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    // texture coordinates (uv)
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+    // Load the image data for the texture
+    int width, height, channels;
+    stbi_set_flip_vertically_on_load(true);
+    textureData = stbi_load("resources/textures/uvgrid512.png", &width, &height, &channels, 0);
+    if (textureData == nullptr) {
+        throw std::runtime_error("Failed to load image");
+    }
+    // Create the texture object
+    glGenTextures(1, &texture);
+    // Bind the texture object
+    glBindTexture(GL_TEXTURE_2D, texture);
+    // Set a bunch of texture parameters (wrapping and filtering)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    // Unload the image, we already stored it as a texture
+    stbi_image_free(textureData);
+
+    shaderProgram->use();
+    glUniform1i(glGetUniformLocation(shaderProgram->ID, "ourTexture"), 0);
+    shaderProgram->setInt("ourTexture", texture);
 
     // The VBO is already registered so we can safely unbind here
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -69,13 +102,15 @@ void LearnGLApp::run() {
         float timeValue = glfwGetTime();
         float value = (std::sin(timeValue) / 2.0f) + 0.5f;
 
+        glBindTexture(GL_TEXTURE_2D, texture);
+
         // Activate the shader
         shaderProgram->use();
         // Pass the color as a uniform
         shaderProgram->setVec4f("ourColor", { value * 0.2f, value * 0.8f, value, 1.0f });
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);

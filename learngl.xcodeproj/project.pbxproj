@@ -18,6 +18,7 @@
 		A30C65EC275BB9C7002679A8 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = resources; path = learngl/resources; sourceTree = "<group>"; };
 		A30C65EE275BBA9F002679A8 /* LearnGLApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LearnGLApp.cpp; sourceTree = "<group>"; };
 		A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LearnGLApp.hpp; sourceTree = "<group>"; };
+		A31677792763D2E1002D8ACD /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		A37EC171275ACB3100C727C8 /* khrplatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = khrplatform.h; sourceTree = "<group>"; };
 		A37EC173275ACB3100C727C8 /* gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
 		A37EC175275ACB3E00C727C8 /* gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl.c; sourceTree = "<group>"; };
@@ -55,6 +56,7 @@
 		A37EC16F275ACB3100C727C8 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				A31677792763D2E1002D8ACD /* stb_image.h */,
 				A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */,
 				A37EC170275ACB3100C727C8 /* KHR */,
 				A37EC172275ACB3100C727C8 /* glad */,

@@ -9,11 +9,16 @@
 
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
+    std::vector<float> texCoords;
     std::vector<unsigned int> indices;
+
+    unsigned char *textureData;
 
     unsigned int VBO;
     unsigned int VAO;
     unsigned int EBO;
+
+    unsigned int texture;
 
     std::shared_ptr<Shader> shaderProgram;
 
