@@ -59,7 +59,7 @@ void LearnGLApp::setup() {
     // Load the image data for the texture
     int width, height, channels;
     stbi_set_flip_vertically_on_load(true);
-    textureData = stbi_load("resources/textures/uvgrid512.png", &width, &height, &channels, 0);
+    textureData = stbi_load("resources/textures/uvgrid.png", &width, &height, &channels, 0);
     if (textureData == nullptr) {
         throw std::runtime_error("Failed to load image");
     }
@@ -106,8 +106,6 @@ void LearnGLApp::run() {
 
         // Activate the shader
         shaderProgram->use();
-        // Pass the color as a uniform
-        shaderProgram->setVec4f("ourColor", { value * 0.2f, value * 0.8f, value, 1.0f });
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
