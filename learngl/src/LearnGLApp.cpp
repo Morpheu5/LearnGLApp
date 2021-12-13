@@ -99,8 +99,9 @@ void LearnGLApp::setup() {
     stbi_image_free(white_bearTexData);
 
     shaderProgram->use();
-    shaderProgram->setInt("uvgrid", uvgrid);
-    shaderProgram->setInt("white_bear", white_bear);
+    // Use the locations, not the texture IDs.
+    shaderProgram->setInt("uvgrid", 0);
+    shaderProgram->setInt("white_bear", 1);
 
     // The VBO is already registered so we can safely unbind here
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -122,9 +123,9 @@ void LearnGLApp::run() {
         // Activate the shader
         shaderProgram->use();
 
-        glActiveTexture(GL_TEXTURE1);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, uvgrid);
-        glActiveTexture(GL_TEXTURE2);
+        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, white_bear);
 
         glBindVertexArray(VAO);
