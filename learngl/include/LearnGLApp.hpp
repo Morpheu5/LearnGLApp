@@ -16,8 +16,9 @@ class LearnGLApp : public BaseApp {
     unsigned int VAO;
     unsigned int EBO;
 
-    unsigned int texture1;
-    unsigned int texture2;
+    GLuint uvgrid;
+    GLuint white_bear;
+    GLuint dummyTexture;
 
     std::shared_ptr<Shader> shaderProgram;
 

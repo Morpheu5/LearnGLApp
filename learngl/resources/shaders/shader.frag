@@ -5,13 +5,13 @@ out vec4 FragColor;
 in vec3 ourColor;
 in vec2 TexCoord;
 
-uniform sampler2D texture1;
-uniform sampler2D texture2;
+uniform sampler2D uvgrid;
+uniform sampler2D white_bear;
 
 void main() {
     if (TexCoord.x < 0.5) {
-        FragColor = texture(texture1, TexCoord);
+        FragColor = texture(uvgrid, TexCoord);
     } else {
-        FragColor = texture(texture2, TexCoord);
+        FragColor = texture(white_bear, TexCoord);
     }
 }
