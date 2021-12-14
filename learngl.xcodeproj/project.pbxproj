@@ -25,6 +25,9 @@
 		A37EC175275ACB3E00C727C8 /* gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl.c; sourceTree = "<group>"; };
 		A37EC176275ACB3E00C727C8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseApp.hpp; sourceTree = "<group>"; };
+		A3C209112767E15B00805670 /* conan_glm_release_arm64.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = conan_glm_release_arm64.xcconfig; path = learngl/conanbuild/conan_glm_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3C209122767E15B00805670 /* conan_glm_vars_release_arm64.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = conan_glm_vars_release_arm64.xcconfig; path = learngl/conanbuild/conan_glm_vars_release_arm64.xcconfig; sourceTree = "<group>"; };
+		A3C209132767E15B00805670 /* conan_glm.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = conan_glm.xcconfig; path = learngl/conanbuild/conan_glm.xcconfig; sourceTree = "<group>"; };
 		A3CDDA40275ABFA800DCBF29 /* learngl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learngl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3CDDA4D275ABFAA00DCBF29 /* learngl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learngl.entitlements; sourceTree = "<group>"; };
@@ -104,18 +107,21 @@
 		A37EC17A275ACF5400C727C8 /* conanstuff */ = {
 			isa = PBXGroup;
 			children = (
-				A3CDDA53275AC0F900DCBF29 /* conanfile.txt */,
 				A3CDDA62275AC4F500DCBF29 /* conan_glfw_debug_arm64.xcconfig */,
 				A3CDDA5E275AC4F500DCBF29 /* conan_glfw_release_arm64.xcconfig */,
 				A3CDDA61275AC4F500DCBF29 /* conan_glfw_vars_debug_arm64.xcconfig */,
 				A3CDDA5C275AC4F500DCBF29 /* conan_glfw_vars_release_arm64.xcconfig */,
 				A3CDDA5D275AC4F500DCBF29 /* conan_glfw.xcconfig */,
+				A3C209112767E15B00805670 /* conan_glm_release_arm64.xcconfig */,
+				A3C209122767E15B00805670 /* conan_glm_vars_release_arm64.xcconfig */,
+				A3C209132767E15B00805670 /* conan_glm.xcconfig */,
 				A3CDDA5A275AC4F500DCBF29 /* conan_opengl_debug_arm64.xcconfig */,
 				A3CDDA5F275AC4F500DCBF29 /* conan_opengl_release_arm64.xcconfig */,
 				A3CDDA63275AC4F500DCBF29 /* conan_opengl_vars_debug_arm64.xcconfig */,
 				A3CDDA60275AC4F500DCBF29 /* conan_opengl_vars_release_arm64.xcconfig */,
 				A3CDDA5B275AC4F500DCBF29 /* conan_opengl.xcconfig */,
 				A3CDDA59275AC4F500DCBF29 /* conandeps.xcconfig */,
+				A3CDDA53275AC0F900DCBF29 /* conanfile.txt */,
 			);
 			name = conanstuff;
 			sourceTree = "<group>";
@@ -262,6 +268,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONAN_glm_INCLUDE_DIRECTORIES = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

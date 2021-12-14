@@ -4,6 +4,10 @@
 #include "LearnGLApp.hpp"
 #include "Shader.hpp"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
@@ -14,15 +18,15 @@ void LearnGLApp::setup() {
 
     // Let's make a square
     vertices = {
-        // positions          // colors           // texture coords
-         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f,   // top left
+        // positions          // texture coords
+         0.5f,  0.5f, 0.0f,   1.0f, 1.0f,   // top right
+         0.5f, -0.5f, 0.0f,   1.0f, 0.0f,   // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f,   // bottom left
+        -0.5f,  0.5f, 0.0f,   0.0f, 1.0f,   // top left
     };
     indices = {
-        0, 1, 2,
-        2, 3, 0
+        0, 1, 3,
+        1, 2, 3,
     };
 
     // Create vertex array object
@@ -47,14 +51,11 @@ void LearnGLApp::setup() {
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
     // texture coordinates (uv)
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     // Load the image data for the texture
     int width, height, channels;
@@ -120,8 +121,13 @@ void LearnGLApp::run() {
         glClearColor(0.2f, 0.3, 0.4f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        glm::mat4 transform(1.0f);
+        transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
+        transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5));
+
         // Activate the shader
         shaderProgram->use();
+        shaderProgram->setMat4f("transform", transform);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, uvgrid);

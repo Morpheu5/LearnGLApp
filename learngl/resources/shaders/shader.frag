@@ -7,9 +7,5 @@ uniform sampler2D uvgrid;
 uniform sampler2D white_bear;
 
 void main() {
-    if (TexCoord.x < 0.5) {
-        FragColor = texture(uvgrid, TexCoord);
-    } else {
-        FragColor = texture(white_bear, TexCoord);
-    }
+    FragColor = texture(uvgrid, TexCoord) * (texture(white_bear, TexCoord) * 0.5 + 0.5);
 }
