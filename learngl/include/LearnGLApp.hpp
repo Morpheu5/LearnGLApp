@@ -18,7 +18,6 @@ class LearnGLApp : public BaseApp {
 
     GLuint uvgrid;
     GLuint white_bear;
-    GLuint dummyTexture;
 
     std::shared_ptr<Shader> shaderProgram;
 

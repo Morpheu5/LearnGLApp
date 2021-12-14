@@ -7,7 +7,7 @@
 
 #include "LearnGLApp.hpp"
 
-int main(int argc, const char * argv[]) {
+auto main(int argc, const char * argv[]) -> int {
     /* Initialize the library */
     if (glfwInit() != GLFW_TRUE) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
         makeWindow(&app, 800, 600, "LearnGL");
         app.setup();
         app.run();
-    } catch(std::runtime_error e) {
+    } catch (std::runtime_error e) {
         std::cerr << e.what() << std::endl;
         return -1;
     }

@@ -41,20 +41,20 @@ void LearnGLApp::setup() {
     // Bind vertex buffer object
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Set data for the vertex buffer object
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(float) * vertices.size()), vertices.data(), GL_STATIC_DRAW);
 
     // Bind the element buffer object
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     // Set the data for the element buffer object
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(unsigned int) * indices.size()), indices.data(), GL_STATIC_DRAW);
 
     // Describe the attribute layout of the data
     // location, size (items), type, normalize, stride (bytes), offset (bytes)
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), static_cast<const void *>(nullptr));
     glEnableVertexAttribArray(0);
     // texture coordinates (uv)
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), reinterpret_cast<const void *>(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Load the image data for the texture
@@ -123,7 +123,7 @@ void LearnGLApp::run() {
 
         glm::mat4 transform(1.0f);
         transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-        transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        transform = glm::rotate(transform, static_cast<float>(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
 
         // Activate the shader
         shaderProgram->use();
@@ -135,7 +135,7 @@ void LearnGLApp::run() {
         glBindTexture(GL_TEXTURE_2D, white_bear);
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);
