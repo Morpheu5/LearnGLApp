@@ -9,12 +9,9 @@
 
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
-    std::vector<float> texCoords;
-    std::vector<unsigned int> indices;
 
     unsigned int VBO;
     unsigned int VAO;
-    unsigned int EBO;
 
     GLuint uvgrid;
     GLuint white_bear;
