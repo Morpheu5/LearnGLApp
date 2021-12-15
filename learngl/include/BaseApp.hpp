@@ -3,6 +3,7 @@
 
 #include "glad/gl.h"
 #include <GLFW/glfw3.h>
+#include "stb_image.h"
 
 #include <stdexcept>
 #include <string>
@@ -30,6 +31,33 @@ public:
         memblock[fileSize] = 0;
 
         return memblock;
+    }
+
+    GLuint loadTexture(std::string filename) {
+        int width, height, channels;
+        GLuint textureID;
+        stbi_set_flip_vertically_on_load(true);
+
+        unsigned char *uvgridTexData = stbi_load(filename.c_str(), &width, &height, &channels, 0);
+        if (uvgridTexData == nullptr) {
+           throw std::runtime_error("Failed to load image");
+        }
+        // Create the texture object
+        glGenTextures(1, &textureID);
+        // Bind the texture object
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        // Set a bunch of texture parameters (wrapping and filtering)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, uvgridTexData);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        // Unload the image, we already stored it as a texture
+        stbi_image_free(uvgridTexData);
+
+        return textureID;
     }
 };
 

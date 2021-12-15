@@ -1,6 +1,3 @@
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 #include "LearnGLApp.hpp"
 #include "Shader.hpp"
 
@@ -58,46 +55,48 @@ void LearnGLApp::setup() {
     glEnableVertexAttribArray(1);
 
     // Load the image data for the texture
-    int width, height, channels;
-    stbi_set_flip_vertically_on_load(true);
+    uvgrid = loadTexture("resources/textures/uvgrid.png");
+//    int width, height, channels;
+//    stbi_set_flip_vertically_on_load(true);
+//
+//    unsigned char *uvgridTexData = stbi_load("resources/textures/uvgrid.png", &width, &height, &channels, 0);
+//    if (uvgridTexData == nullptr) {
+//        throw std::runtime_error("Failed to load image");
+//    }
+//    // Create the texture object
+//    glGenTextures(1, &uvgrid);
+//    // Bind the texture object
+//    glBindTexture(GL_TEXTURE_2D, uvgrid);
+//    // Set a bunch of texture parameters (wrapping and filtering)
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, uvgridTexData);
+//    glGenerateMipmap(GL_TEXTURE_2D);
+//    // Unload the image, we already stored it as a texture
+//    stbi_image_free(uvgridTexData);
 
-    unsigned char *uvgridTexData = stbi_load("resources/textures/uvgrid.png", &width, &height, &channels, 0);
-    if (uvgridTexData == nullptr) {
-        throw std::runtime_error("Failed to load image");
-    }
-    // Create the texture object
-    glGenTextures(1, &uvgrid);
-    // Bind the texture object
-    glBindTexture(GL_TEXTURE_2D, uvgrid);
-    // Set a bunch of texture parameters (wrapping and filtering)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, uvgridTexData);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    // Unload the image, we already stored it as a texture
-    stbi_image_free(uvgridTexData);
-
-    unsigned char *white_bearTexData = stbi_load("resources/textures/white_bear.png", &width, &height, &channels, 0);
-    if (white_bearTexData == nullptr) {
-        throw std::runtime_error("Failed to load image");
-    }
-    // Create the texture object
-    glGenTextures(1, &white_bear);
-    // Bind the texture object
-    glBindTexture(GL_TEXTURE_2D, white_bear);
-    // Set a bunch of texture parameters (wrapping and filtering)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, white_bearTexData);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    // Unload the image, we already stored it as a texture
-    stbi_image_free(white_bearTexData);
+    white_bear = loadTexture("resources/textures/white_bear.png");
+//    unsigned char *white_bearTexData = stbi_load("resources/textures/white_bear.png", &width, &height, &channels, 0);
+//    if (white_bearTexData == nullptr) {
+//        throw std::runtime_error("Failed to load image");
+//    }
+//    // Create the texture object
+//    glGenTextures(1, &white_bear);
+//    // Bind the texture object
+//    glBindTexture(GL_TEXTURE_2D, white_bear);
+//    // Set a bunch of texture parameters (wrapping and filtering)
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, white_bearTexData);
+//    glGenerateMipmap(GL_TEXTURE_2D);
+//    // Unload the image, we already stored it as a texture
+//    stbi_image_free(white_bearTexData);
 
     shaderProgram->use();
     // Use the locations, not the texture IDs.

@@ -12,6 +12,7 @@
 		A326CF38275B6F7B00D75E1A /* gl.c in Sources */ = {isa = PBXBuildFile; fileRef = A37EC175275ACB3E00C727C8 /* gl.c */; };
 		A37EC178275ACB3E00C727C8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A37EC176275ACB3E00C727C8 /* main.cpp */; };
 		A3CDDA47275ABFAA00DCBF29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3CDDA46275ABFAA00DCBF29 /* Assets.xcassets */; };
+		A3FCCDBE276A534500C3BB0E /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3FCCDBD276A534500C3BB0E /* stb_image.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		A3CDDA62275AC4F500DCBF29 /* conan_glfw_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_glfw_debug_arm64.xcconfig; path = learngl/conanbuild/conan_glfw_debug_arm64.xcconfig; sourceTree = "<group>"; };
 		A3CDDA63275AC4F500DCBF29 /* conan_opengl_vars_debug_arm64.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = conan_opengl_vars_debug_arm64.xcconfig; path = learngl/conanbuild/conan_opengl_vars_debug_arm64.xcconfig; sourceTree = "<group>"; };
 		A3F7571927628733000E7034 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		A3FCCDBD276A534500C3BB0E /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				A37EC175275ACB3E00C727C8 /* gl.c */,
 				A37EC176275ACB3E00C727C8 /* main.cpp */,
 				A30C65EE275BBA9F002679A8 /* LearnGLApp.cpp */,
+				A3FCCDBD276A534500C3BB0E /* stb_image.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A326CF38275B6F7B00D75E1A /* gl.c in Sources */,
+				A3FCCDBE276A534500C3BB0E /* stb_image.cpp in Sources */,
 				A30C65F0275BBA9F002679A8 /* LearnGLApp.cpp in Sources */,
 				A37EC178275ACB3E00C727C8 /* main.cpp in Sources */,
 			);
