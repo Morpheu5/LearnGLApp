@@ -58,6 +58,19 @@ void LearnGLApp::setup() {
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
+    positions = {
+        glm::vec3( 0.0f,  0.0f,   0.0f),
+        glm::vec3( 2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f,  -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f,  -3.5f),
+        glm::vec3(-1.7f,  3.0f,  -7.5f),
+        glm::vec3( 1.3f, -2.0f,  -2.5f),
+        glm::vec3( 1.5f,  2.0f,  -2.5f),
+        glm::vec3( 1.5f,  0.2f,  -1.5f),
+        glm::vec3(-1.3f,  1.0f,  -1.5f)
+    };
+
     // Create vertex array object
     glGenVertexArrays(1, &VAO);
     // Create vertex buffer object
@@ -108,14 +121,12 @@ void LearnGLApp::run() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         float t = glfwGetTime();
-        // Model matrix to rotate the model the right way
-        glm::mat4 model(1.0f);
-        model = glm::rotate(model, glm::radians(30.0f * fmodf(t, 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::rotate(model, glm::radians( 45.0f), glm::vec3(cos(3 * t), sin(5 * t), 0.0f));
 
         // View (camera), move it backwards a little
         glm::mat4 view(1.0f);
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        view = glm::rotate(view, glm::radians(40 * t), glm::vec3(0.0f, 0.0f, 1.0f));
+
 
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
@@ -123,7 +134,6 @@ void LearnGLApp::run() {
         // Activate the shader
         shaderProgram->use();
         // send the matrices
-        shaderProgram->setMat4f("model", model);
         shaderProgram->setMat4f("view", view);
         shaderProgram->setMat4f("projection", projection);
 
@@ -133,7 +143,19 @@ void LearnGLApp::run() {
         glBindTexture(GL_TEXTURE_2D, white_bear);
 
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+        for (uint i = 0; i < positions.size(); ++i) {
+            auto position = positions[i];
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, position);
+
+            float angle = 20.0f * i;
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            model = glm::rotate(model, glm::radians(30.0f * fmodf(t, 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(45.0f), glm::vec3(cos(3 * t + i), sin(5 * t), 0.0f));
+            shaderProgram->setMat4f("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+            
+        }
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);

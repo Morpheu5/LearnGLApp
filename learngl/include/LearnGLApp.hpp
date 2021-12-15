@@ -4,11 +4,14 @@
 #include <vector>
 #include <memory>
 
+#include <glm/glm.hpp>
+
 #include "BaseApp.hpp"
 #include "Shader.hpp"
 
 class LearnGLApp : public BaseApp {
     std::vector<float> vertices;
+    std::vector<glm::vec3> positions;
 
     unsigned int VBO;
     unsigned int VAO;
