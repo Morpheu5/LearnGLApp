@@ -123,8 +123,11 @@ void LearnGLApp::run() {
         float t = glfwGetTime();
 
         // View (camera), move it backwards a little
+        const float radius = 10.0f;
+        float camX = sin(t) * radius;
+        float camZ = cos(t) * radius;
         glm::mat4 view(1.0f);
-        view = glm::lookAt(glm::vec3(-cos(t)/2.0f, -sin(t)/2.0f, 3.0f), glm::vec3(cos(t)/2.0f, sin(t)/2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(cos(t)/2.0f, sin(t)/2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
