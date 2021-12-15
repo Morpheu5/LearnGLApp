@@ -107,11 +107,11 @@ void LearnGLApp::run() {
         glClearColor(0.2f, 0.3, 0.4f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        float t = glfwGetTime();
         // Model matrix to rotate the model the right way
         glm::mat4 model(1.0f);
-        model = glm::rotate(model, glm::radians(30.0f * fmodf(glfwGetTime(), 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::rotate(model, glm::radians( 45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::rotate(model, glm::radians(30.0f * fmodf(t, 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians( 45.0f), glm::vec3(cos(3 * t), sin(5 * t), 0.0f));
 
         // View (camera), move it backwards a little
         glm::mat4 view(1.0f);
