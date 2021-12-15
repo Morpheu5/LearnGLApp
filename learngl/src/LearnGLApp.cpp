@@ -80,13 +80,25 @@ void LearnGLApp::run() {
         glClearColor(0.2f, 0.3, 0.4f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glm::mat4 transform(1.0f);
-        transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-        transform = glm::rotate(transform, static_cast<float>(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
+        // Model matrix to rotate the model the right way
+        glm::mat4 model(1.0f);
+        model = glm::rotate(model, glm::radians(30.0f * fmodf(glfwGetTime(), 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+
+        // View (camera), move it backwards a little
+        glm::mat4 view(1.0f);
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+        // Projection (perspective)
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
 
         // Activate the shader
         shaderProgram->use();
-        shaderProgram->setMat4f("transform", transform);
+        // send the matrices
+        shaderProgram->setMat4f("model", model);
+        shaderProgram->setMat4f("view", view);
+        shaderProgram->setMat4f("projection", projection);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, uvgrid);
