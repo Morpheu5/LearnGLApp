@@ -71,11 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				A31677792763D2E1002D8ACD /* stb_image.h */,
+				A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */,
 				A30C65EF275BBA9F002679A8 /* LearnGLApp.hpp */,
+				A3F7571927628733000E7034 /* Shader.hpp */,
 				A37EC170275ACB3100C727C8 /* KHR */,
 				A37EC172275ACB3100C727C8 /* glad */,
-				A3B4056C275CDB6A00EB5DC6 /* BaseApp.hpp */,
-				A3F7571927628733000E7034 /* Shader.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";

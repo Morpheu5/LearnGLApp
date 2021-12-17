@@ -10,8 +10,21 @@
 #include "Shader.hpp"
 
 class LearnGLApp : public BaseApp {
+    glm::vec2 viewportSize = glm::vec2();
+    glm::vec2 lastMousePos = glm::vec2();
+    float pitch = 0.0f;
+    float yaw = 0.0f;
+    bool firstMouseEvent = true;
+    
     std::vector<float> vertices;
     std::vector<glm::vec3> positions;
+
+    glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
+    glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
+
+    float deltaTime = 0.0f;
+    float lastFrame = 0.0f;
 
     unsigned int VBO;
     unsigned int VAO;
@@ -25,9 +38,13 @@ public:
     virtual void setup();
     virtual void run();
 
-    virtual void resize(int width, int height) {
+    virtual void resize(int width, int height) override {
         glViewport(0, 0, width, height);
+        viewportSize.x = width;
+        viewportSize.y = height;
     }
+
+    virtual void mouseCallback(float xPos, float yPos) override;
 
     virtual void processInput();
 

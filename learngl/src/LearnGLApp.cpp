@@ -10,6 +10,12 @@
 #include <cmath>
 
 void LearnGLApp::setup() {
+    int w, h;
+    glfwGetWindowSize(_window, &w, &h);
+    viewportSize = glm::vec2(static_cast<float>(w), static_cast<float>(h));
+    lastMousePos = viewportSize / 2.0f;
+
+
     // Create the shader program
     shaderProgram = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/shader.frag");
 
@@ -110,10 +116,16 @@ void LearnGLApp::setup() {
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glEnable(GL_DEPTH_TEST);
+
+    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void LearnGLApp::run() {
     while(!glfwWindowShouldClose(_window)) {
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
         processInput();
         
         // Render stuff
@@ -123,11 +135,8 @@ void LearnGLApp::run() {
         float t = glfwGetTime();
 
         // View (camera), move it backwards a little
-        const float radius = 10.0f;
-        float camX = sin(t) * radius;
-        float camZ = cos(t) * radius;
         glm::mat4 view(1.0f);
-        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(cos(t)/2.0f, sin(t)/2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
@@ -166,10 +175,37 @@ void LearnGLApp::run() {
     }
 }
 
+void LearnGLApp::mouseCallback(float xPos, float yPos) {
+    if (firstMouseEvent) {
+        lastMousePos = glm::vec2(xPos, yPos);
+        firstMouseEvent = false;
+    }
+    const float sensitivity = 0.1f;
+    const float xOff = sensitivity * (xPos - lastMousePos.x);
+    const float yOff = sensitivity * (lastMousePos.y - yPos); // upside down
+    lastMousePos = glm::vec2(xPos, yPos);
+
+    yaw += xOff;
+    pitch = std::min(std::max(pitch + yOff, -89.0f), 89.0f);
+
+    glm::vec3 direction(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch)));
+    cameraFront = glm::normalize(direction);
+}
+
 void LearnGLApp::processInput() {
     if (glfwGetKey(_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(_window, GLFW_TRUE);
     }
+
+    const float cameraSpeed = 2.5f * deltaTime;
+    if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos += cameraSpeed * cameraFront;
+    if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraPos -= cameraSpeed * cameraFront;
+    if (glfwGetKey(_window, GLFW_KEY_A) == GLFW_PRESS)
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    if (glfwGetKey(_window, GLFW_KEY_D) == GLFW_PRESS)
+        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 }
 
 
