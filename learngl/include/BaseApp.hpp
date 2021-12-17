@@ -18,7 +18,8 @@ public:
     GLFWwindow *window() { return _window; }
 
     virtual void resize(int width, int height) {};
-    virtual void mouseCallback(float xPos, float yPos) {};
+    virtual void mouseMoved(float xPos, float yPos) {};
+    virtual void mouseScrolled(float xOffset, float yOffset) {};
 
     auto readFile(const std::string &filename) {
         std::ifstream file(filename, std::ios::binary | std::ios::ate);
@@ -83,8 +84,11 @@ void makeWindow(T *userWindow, int width, int height, const char *title) {
     auto _resize = [](GLFWwindow *w, int width, int height) { static_cast<T *>(glfwGetWindowUserPointer(w))->resize(width, height); };
     glfwSetFramebufferSizeCallback(glfwWindow, _resize);
 
-    auto _mouseCallback = [](GLFWwindow *w, double xPos, double yPos) { static_cast<T *>(glfwGetWindowUserPointer(w))->mouseCallback(static_cast<float>(xPos), static_cast<float>(yPos)); };
-    glfwSetCursorPosCallback(glfwWindow, _mouseCallback);
+    auto _mouseMovedCallback = [](GLFWwindow *w, double xPos, double yPos) { static_cast<T *>(glfwGetWindowUserPointer(w))->mouseMoved(static_cast<float>(xPos), static_cast<float>(yPos)); };
+    glfwSetCursorPosCallback(glfwWindow, _mouseMovedCallback);
+
+    auto _mouseScrolledCallback = [](GLFWwindow *w, double xOff, double yOff) { static_cast<T *>(glfwGetWindowUserPointer(w))->mouseScrolled(static_cast<float>(xOff), static_cast<float>(yOff)); };
+    glfwSetScrollCallback(glfwWindow, _mouseScrolledCallback);
 }
 
 #endif

@@ -15,7 +15,6 @@ void LearnGLApp::setup() {
     viewportSize = glm::vec2(static_cast<float>(w), static_cast<float>(h));
     lastMousePos = viewportSize / 2.0f;
 
-
     // Create the shader program
     shaderProgram = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/shader.frag");
 
@@ -135,11 +134,10 @@ void LearnGLApp::run() {
         float t = glfwGetTime();
 
         // View (camera), move it backwards a little
-        glm::mat4 view(1.0f);
-        view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        glm::mat4 view = camera.GetViewMatrix();
 
         // Projection (perspective)
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), viewportSize.x/viewportSize.y, 0.1f, 100.0f);
 
         // Activate the shader
         shaderProgram->use();
@@ -175,21 +173,21 @@ void LearnGLApp::run() {
     }
 }
 
-void LearnGLApp::mouseCallback(float xPos, float yPos) {
+void LearnGLApp::mouseMoved(float xPos, float yPos) {
     if (firstMouseEvent) {
         lastMousePos = glm::vec2(xPos, yPos);
         firstMouseEvent = false;
     }
-    const float sensitivity = 0.1f;
-    const float xOff = sensitivity * (xPos - lastMousePos.x);
-    const float yOff = sensitivity * (lastMousePos.y - yPos); // upside down
+
+    const float xOff = xPos - lastMousePos.x;
+    const float yOff = lastMousePos.y - yPos; // upside down
     lastMousePos = glm::vec2(xPos, yPos);
 
-    yaw += xOff;
-    pitch = std::min(std::max(pitch + yOff, -89.0f), 89.0f);
+    camera.ProcessMouseMovement(xOff, yOff);
+}
 
-    glm::vec3 direction(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch)));
-    cameraFront = glm::normalize(direction);
+void LearnGLApp::mouseScrolled(float xOffset, float yOffset) {
+    camera.ProcessMouseScroll(yOffset);
 }
 
 void LearnGLApp::processInput() {
@@ -197,15 +195,14 @@ void LearnGLApp::processInput() {
         glfwSetWindowShouldClose(_window, GLFW_TRUE);
     }
 
-    const float cameraSpeed = 2.5f * deltaTime;
     if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS)
-        cameraPos += cameraSpeed * cameraFront;
+        camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos -= cameraSpeed * cameraFront;
+        camera.ProcessKeyboard(BACKWARD, deltaTime);
     if (glfwGetKey(_window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(_window, GLFW_KEY_D) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        camera.ProcessKeyboard(RIGHT, deltaTime);
 }
 
 
