@@ -18,7 +18,7 @@ void LearnGLApp::setup() {
     // Create the shader program
     shaderProgram = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/shader.frag");
 
-    // Let's make a square
+    // Let's make a cube
     vertices = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
          0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -61,19 +61,6 @@ void LearnGLApp::setup() {
          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-    };
-
-    positions = {
-        glm::vec3( 0.0f,  0.0f,   0.0f),
-        glm::vec3( 2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f,  -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f,  -3.5f),
-        glm::vec3(-1.7f,  3.0f,  -7.5f),
-        glm::vec3( 1.3f, -2.0f,  -2.5f),
-        glm::vec3( 1.5f,  2.0f,  -2.5f),
-        glm::vec3( 1.5f,  0.2f,  -1.5f),
-        glm::vec3(-1.3f,  1.0f,  -1.5f)
     };
 
     // Create vertex array object
@@ -128,7 +115,7 @@ void LearnGLApp::run() {
         processInput();
         
         // Render stuff
-        glClearColor(0.2f, 0.3, 0.4f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         float t = glfwGetTime();
@@ -151,19 +138,11 @@ void LearnGLApp::run() {
         glBindTexture(GL_TEXTURE_2D, white_bear);
 
         glBindVertexArray(VAO);
-        for (uint i = 0; i < positions.size(); ++i) {
-            auto position = positions[i];
-            glm::mat4 model(1.0f);
-            model = glm::translate(model, position);
 
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            model = glm::rotate(model, glm::radians(30.0f * fmodf(t, 360.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(45.0f), glm::vec3(cos(3 * t + i), sin(5 * t), 0.0f));
-            shaderProgram->setMat4f("model", model);
-            glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
-            
-        }
+        glm::mat4 model(1.0f);
+        shaderProgram->setMat4f("model", model);
+
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
 
         // Do the framebuffer swappy thing
         glfwSwapBuffers(_window);

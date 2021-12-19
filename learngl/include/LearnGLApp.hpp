@@ -18,7 +18,6 @@ class LearnGLApp : public BaseApp {
     Camera camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     std::vector<float> vertices;
-    std::vector<glm::vec3> positions;
 
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
