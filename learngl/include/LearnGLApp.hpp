@@ -15,7 +15,7 @@ class LearnGLApp : public BaseApp {
     glm::vec2 lastMousePos = glm::vec2();
 
     bool firstMouseEvent = true;
-    Camera camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    Camera camera = Camera(glm::vec3(-2.0f, 2.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, -20.0f);
 
     std::vector<float> vertices;
 
@@ -23,12 +23,16 @@ class LearnGLApp : public BaseApp {
     float lastFrame = 0.0f;
 
     unsigned int VBO;
-    unsigned int VAO;
+    unsigned int cubeVAO;
+    unsigned int lightVAO;
 
-    GLuint uvgrid;
-    GLuint white_bear;
+    // GLuint uvgrid;
+    // GLuint white_bear;
 
-    std::shared_ptr<Shader> shaderProgram;
+    std::shared_ptr<Shader> lightingShader;
+    std::shared_ptr<Shader> lampShader;
+
+    glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
 
 public:
     virtual void setup();
