@@ -29,7 +29,7 @@ class LearnGLApp : public BaseApp {
     // GLuint uvgrid;
     // GLuint white_bear;
 
-    std::shared_ptr<Shader> lightingShader;
+    std::shared_ptr<Shader> phongShader;
     std::shared_ptr<Shader> lampShader;
 
     glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
