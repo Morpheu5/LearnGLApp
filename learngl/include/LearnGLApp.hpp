@@ -35,6 +35,8 @@ class LearnGLApp : public BaseApp {
     glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
 
 public:
+    void extracted();
+    
     virtual void setup();
     virtual void run();
 

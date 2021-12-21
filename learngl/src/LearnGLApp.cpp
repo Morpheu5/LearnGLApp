@@ -15,10 +15,6 @@ void LearnGLApp::setup() {
     viewportSize = glm::vec2(static_cast<float>(w), static_cast<float>(h));
     lastMousePos = viewportSize / 2.0f;
 
-    // Load the image data for the texture
-    // uvgrid = loadTexture("resources/textures/uvgrid.png");
-    // white_bear = loadTexture("resources/textures/white_bear.png");
-
     // Create the shader program
     phongShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/phongShader.frag");
     lampShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/lampShader.frag");
@@ -93,15 +89,11 @@ void LearnGLApp::setup() {
     // glEnableVertexAttribArray(2);
 
     glGenVertexArrays(1, &lightVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    // No need to rebind the VBO
+    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBindVertexArray(lightVAO);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), static_cast<const void *>(0));
     glEnableVertexAttribArray(0);
-
-    // lightingShader->use();
-    // Use the locations, not the texture IDs.
-    // lightingShader->setInt("uvgrid", 0);
-    // lightingShader->setInt("white_bear", 1);
 
     // The VBO is already registered so we can safely unbind here
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -136,13 +128,6 @@ void LearnGLApp::run() {
 
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), viewportSize.x/viewportSize.y, 0.1f, 100.0f);
-
-        /*
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, uvgrid);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, white_bear);
-         */
 
         {
             glBindVertexArray(cubeVAO);
