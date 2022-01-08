@@ -135,7 +135,11 @@ void LearnGLApp::run() {
             model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
 
             phongShader->use();
-            phongShader->setVec3f("objectColor", { 0.0f, 0.667f, 1.0f });
+            phongShader->setVec3f("material.ambient", { 1.0f, 0.5f, 0.31f });
+            phongShader->setVec3f("material.diffuse", { 1.0f, 0.5f, 0.31f });
+            phongShader->setVec3f("material.specular", { 0.5f, 0.5f, 0.5f });
+            phongShader->setFloat("material.shininess", 32.0f);
+            
             phongShader->setVec3f("lightColor", { 1.0f, 1.0f, 1.0f });
             phongShader->setVec3f("lightPosition", lightPosition);
             phongShader->setVec3f("cameraPosition", camera.Position);

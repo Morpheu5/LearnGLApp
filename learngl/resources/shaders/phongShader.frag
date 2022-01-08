@@ -13,25 +13,31 @@ uniform vec3 cameraPosition;
 uniform sampler2D uvgrid;
 uniform sampler2D white_bear;
 
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+
+uniform Material material;
+
 void main() {
-    // Ambient
-    float ambientStrength = 0.1;
-    vec3 ambient = ambientStrength * lightColor;
+    // ambient
+    vec3 ambient = lightColor * material.ambient;
 
-    // Diffuse
-    vec3 normal = normalize(Normal);
-    vec3 lightDirection = normalize(lightPosition - FragPos);
-    float d = max(dot(normal, lightDirection), 0.0);
-    vec3 diffuse = d * lightColor;
+    // diffuse
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPosition - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = lightColor * (diff * material.diffuse);
 
-    // Specular
-    float specularStrength = 0.5;
-    float shininess = 128.0;
-    vec3 viewerDirection = normalize(cameraPosition - FragPos);
-    vec3 reflectDirection = reflect(-lightDirection, normal);
-    float s = pow(max(dot(viewerDirection, reflectDirection), 0.0), shininess);
-    vec3 specular = specularStrength * s * lightColor;
+    // specular
+    vec3 viewDir = normalize(cameraPosition - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = lightColor * (spec * material.specular);
 
-    vec3 result = (ambient + diffuse + specular) * objectColor;
+    vec3 result = ambient + diffuse + specular;
     FragColor = vec4(result, 1.0);
 }
