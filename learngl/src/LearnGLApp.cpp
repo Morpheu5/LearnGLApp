@@ -19,6 +19,7 @@ void LearnGLApp::setup() {
     phongShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/phongShader.frag");
     lampShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/lampShader.frag");
     diffuseMap = loadTexture("resources/textures/container2.png");
+    specularMap = loadTexture("resources/textures/container2_specular.png");
     
     // Let's make a cube
     vertices = {
@@ -133,16 +134,21 @@ void LearnGLApp::run() {
         glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
         glm::vec3 lightDiffuseColor = lightColor * 0.5f;
         glm::vec3 lightAmbientColor = lightColor * 0.2f;
+        lightPosition.x = 0.5f * sinf(t);
+        lightPosition.z = 0.5f * cosf(t);
 
         {
             glBindVertexArray(cubeVAO);
             glm::mat4 model(1.0f);
-            model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
+            // model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
 
             phongShader->use();
             phongShader->setInt("material.diffuse", 0);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, diffuseMap);
+            phongShader->setInt("material.specular", 1);
+            glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, specularMap);
 
             phongShader->setVec3f("material.specular", { 0.5f, 0.5f, 0.5f });
             phongShader->setFloat("material.shininess", 32.0f);

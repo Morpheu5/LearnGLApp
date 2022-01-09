@@ -15,7 +15,7 @@ class LearnGLApp : public BaseApp {
     glm::vec2 lastMousePos = glm::vec2();
 
     bool firstMouseEvent = true;
-    Camera camera = Camera(glm::vec3(-2.0f, 2.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, -20.0f);
+    Camera camera = Camera(glm::vec3(0.0f, 3.0f, 1.5f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, -60.0f);
 
     std::vector<float> vertices;
 
@@ -29,6 +29,7 @@ class LearnGLApp : public BaseApp {
     // GLuint uvgrid;
     // GLuint white_bear;
     GLuint diffuseMap;
+    GLuint specularMap;
 
     std::shared_ptr<Shader> phongShader;
     std::shared_ptr<Shader> lampShader;
