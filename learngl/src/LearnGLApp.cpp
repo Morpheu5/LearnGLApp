@@ -18,7 +18,8 @@ void LearnGLApp::setup() {
     // Create the shader program
     phongShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/phongShader.frag");
     lampShader = std::make_shared<Shader>("resources/shaders/shader.vert", "resources/shaders/lampShader.frag");
-
+    diffuseMap = loadTexture("resources/textures/container2.png");
+    
     // Let's make a cube
     vertices = {
         // positions          normals              uv
@@ -85,8 +86,8 @@ void LearnGLApp::setup() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<const void *>(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
     // texture coordinates (uv)
-    // glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<const void *>(6 * sizeof(float)));
-    // glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<const void *>(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     glGenVertexArrays(1, &lightVAO);
     // No need to rebind the VBO
@@ -129,7 +130,7 @@ void LearnGLApp::run() {
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), viewportSize.x/viewportSize.y, 0.1f, 100.0f);
 
-        glm::vec3 lightColor { sin(t*2.0f), sin(t*0.7f), sin(t*1.3f) };
+        glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
         glm::vec3 lightDiffuseColor = lightColor * 0.5f;
         glm::vec3 lightAmbientColor = lightColor * 0.2f;
 
@@ -139,8 +140,10 @@ void LearnGLApp::run() {
             model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
 
             phongShader->use();
-            phongShader->setVec3f("material.ambient", { 1.0f, 0.5f, 0.31f });
-            phongShader->setVec3f("material.diffuse", { 1.0f, 0.5f, 0.31f });
+            phongShader->setInt("material.diffuse", 0);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, diffuseMap);
+
             phongShader->setVec3f("material.specular", { 0.5f, 0.5f, 0.5f });
             phongShader->setFloat("material.shininess", 32.0f);
 
@@ -156,6 +159,7 @@ void LearnGLApp::run() {
             phongShader->setMat4f("projection", projection);
             phongShader->setMat4f("mvp", projection * view * model);
             phongShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
+
 
             glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
         }

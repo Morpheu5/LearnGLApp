@@ -56,7 +56,11 @@ public:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         // Generate the textures (type, mipmap level, texture format, width, height, 0 (border), image format, data type, data)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, uvgridTexData);
+        if (channels == 4) {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, uvgridTexData);
+        } else {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, uvgridTexData);
+        }
         glGenerateMipmap(GL_TEXTURE_2D);
         // Unload the image, we already stored it as a texture
         stbi_image_free(uvgridTexData);

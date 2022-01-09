@@ -28,6 +28,7 @@ class LearnGLApp : public BaseApp {
 
     // GLuint uvgrid;
     // GLuint white_bear;
+    GLuint diffuseMap;
 
     std::shared_ptr<Shader> phongShader;
     std::shared_ptr<Shader> lampShader;
