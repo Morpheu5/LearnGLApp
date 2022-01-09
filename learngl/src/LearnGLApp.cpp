@@ -129,6 +129,10 @@ void LearnGLApp::run() {
         // Projection (perspective)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), viewportSize.x/viewportSize.y, 0.1f, 100.0f);
 
+        glm::vec3 lightColor { sin(t*2.0f), sin(t*0.7f), sin(t*1.3f) };
+        glm::vec3 lightDiffuseColor = lightColor * 0.5f;
+        glm::vec3 lightAmbientColor = lightColor * 0.2f;
+
         {
             glBindVertexArray(cubeVAO);
             glm::mat4 model(1.0f);
@@ -139,6 +143,10 @@ void LearnGLApp::run() {
             phongShader->setVec3f("material.diffuse", { 1.0f, 0.5f, 0.31f });
             phongShader->setVec3f("material.specular", { 0.5f, 0.5f, 0.5f });
             phongShader->setFloat("material.shininess", 32.0f);
+
+            phongShader->setVec3f("light.ambient", lightAmbientColor);
+            phongShader->setVec3f("light.diffuse", lightDiffuseColor);
+            phongShader->setVec3f("light.specular", { 1.0f, 1.0f, 1.0f });
             
             phongShader->setVec3f("lightColor", { 1.0f, 1.0f, 1.0f });
             phongShader->setVec3f("lightPosition", lightPosition);
@@ -159,6 +167,7 @@ void LearnGLApp::run() {
             model = glm::scale(model, glm::vec3(0.2f));
 
             lampShader->use();
+            lampShader->setVec3f("color", lightColor);
             lampShader->setMat4f("model", model);
             lampShader->setMat4f(("view"), view);
             lampShader->setMat4f("projection", projection);
