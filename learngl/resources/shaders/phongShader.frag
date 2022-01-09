@@ -6,7 +6,6 @@ in vec3 FragPos;
 in vec3 Normal;
 
 uniform vec3 objectColor;
-uniform vec3 lightPosition;
 uniform vec3 cameraPosition;
 
 uniform sampler2D uvgrid;
@@ -35,7 +34,7 @@ void main() {
 
     // diffuse
     vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(lightPosition - FragPos);
+    vec3 lightDir = normalize(light.position - FragPos);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
 

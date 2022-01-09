@@ -157,8 +157,7 @@ void LearnGLApp::run() {
             phongShader->setVec3f("light.diffuse", lightDiffuseColor);
             phongShader->setVec3f("light.specular", { 1.0f, 1.0f, 1.0f });
             
-            phongShader->setVec3f("lightColor", { 1.0f, 1.0f, 1.0f });
-            phongShader->setVec3f("lightPosition", lightPosition);
+            phongShader->setVec3f("light.position", lightPosition);
             phongShader->setVec3f("cameraPosition", camera.Position);
             phongShader->setMat4f("model", model);
             phongShader->setMat4f("view", view);
