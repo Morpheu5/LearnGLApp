@@ -137,21 +137,10 @@ void LearnGLApp::run() {
         lightPosition.x = 0.5f * sinf(t);
         lightPosition.z = 0.5f * cosf(t);
 
-        glm::vec3 cubePositions[] = {
-            glm::vec3( 0.0f,  0.0f,  0.0f),
-            glm::vec3( 2.0f,  5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3( 2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f,  3.0f, -7.5f),
-            glm::vec3( 1.3f, -2.0f, -2.5f),
-            glm::vec3( 1.5f,  2.0f, -2.5f),
-            glm::vec3( 1.5f,  0.2f, -1.5f),
-            glm::vec3(-1.3f,  1.0f, -1.5f)
-        };
-
         {
             glBindVertexArray(cubeVAO);
+            glm::mat4 model(1.0f);
+            // model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
 
             phongShader->use();
             phongShader->setInt("material.diffuse", 0);
@@ -167,22 +156,17 @@ void LearnGLApp::run() {
             phongShader->setVec3f("light.ambient", lightAmbientColor);
             phongShader->setVec3f("light.diffuse", lightDiffuseColor);
             phongShader->setVec3f("light.specular", { 1.0f, 1.0f, 1.0f });
-
-            phongShader->setVec3f("light.direction", { -0.2f, -1.0f, -0.3f });
+            
+            phongShader->setVec3f("light.position", lightPosition);
             phongShader->setVec3f("cameraPosition", camera.Position);
+            phongShader->setMat4f("model", model);
             phongShader->setMat4f("view", view);
             phongShader->setMat4f("projection", projection);
+            phongShader->setMat4f("mvp", projection * view * model);
+            phongShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
 
-            for (uint i = 0; i < 10; ++i) {
-                glm::mat4 model(1.0f);
-                model = glm::translate(model, cubePositions[i]);
-                
-                phongShader->setMat4f("model", model);
-                phongShader->setMat4f("mvp", projection * view * model);
-                phongShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
 
-                glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
-            }
+            glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
         }
 
         {
