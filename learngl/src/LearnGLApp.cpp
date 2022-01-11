@@ -161,7 +161,10 @@ void LearnGLApp::run() {
             phongShader->setFloat("light.linear", 0.09f);
             phongShader->setFloat("light.quadratic", 0.032f);
 
-            phongShader->setVec3f("light.position", lightPosition);
+            phongShader->setVec3f("light.position", camera.Position);
+            phongShader->setVec3f("light.direction", camera.Front);
+            phongShader->setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+            phongShader->setFloat("light.outerCutOff", glm::cos(glm::radians(15.0f)));
             phongShader->setVec3f("cameraPosition", camera.Position);
             phongShader->setMat4f("model", model);
             phongShader->setMat4f("view", view);
