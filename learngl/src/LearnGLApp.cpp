@@ -66,6 +66,26 @@ void LearnGLApp::setup() {
         -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
     };
+    // position all the cubes
+    cubePositions = {
+        glm::vec3( 0.0f,  0.0f,  0.0f),
+        glm::vec3( 2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f,  3.0f, -7.5f),
+        glm::vec3( 1.3f, -2.0f, -2.5f),
+        glm::vec3( 1.5f,  2.0f, -2.5f),
+        glm::vec3( 1.5f,  0.2f, -1.5f),
+        glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
+    // position the point lights
+    pointLightPositions = {
+        glm::vec3( 0.7f,  0.2f,  2.0f),
+        glm::vec3( 2.3f, -3.3f, -4.0f),
+        glm::vec3(-4.0f,  2.0f, -12.0f),
+        glm::vec3( 0.0f,  0.0f, -3.0f)
+    };
 
     // Create vertex buffer object
     glGenBuffers(1, &VBO);
@@ -132,16 +152,10 @@ void LearnGLApp::run() {
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), viewportSize.x/viewportSize.y, 0.1f, 100.0f);
 
         glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
-        glm::vec3 lightDiffuseColor = lightColor * 0.5f;
-        glm::vec3 lightAmbientColor = lightColor * 0.2f;
         lightPosition.x = 0.5f * sinf(t);
         lightPosition.z = 0.5f * cosf(t);
 
         {
-            glBindVertexArray(cubeVAO);
-            glm::mat4 model(1.0f);
-            // model = glm::translate(model, glm::vec3(0.5f * sinf(t), 0.0f, 0.5f * cosf(t)));
-
             phongShader->use();
             phongShader->setInt("material.diffuse", 0);
             glActiveTexture(GL_TEXTURE0);
@@ -153,27 +167,70 @@ void LearnGLApp::run() {
             phongShader->setVec3f("material.specular", { 0.5f, 0.5f, 0.5f });
             phongShader->setFloat("material.shininess", 32.0f);
 
-            phongShader->setVec3f("light.ambient", lightAmbientColor);
-            phongShader->setVec3f("light.diffuse", lightDiffuseColor);
-            phongShader->setVec3f("light.specular", { 1.0f, 1.0f, 1.0f });
+            phongShader->setVec3f("dirLight.direction", { -0.2f, -1.0f, -0.3f });
+            phongShader->setVec3f("dirLight.ambient", { 0.05f, 0.05f, 0.05f });
+            phongShader->setVec3f("dirLight.diffuse", { 0.4f, 0.4f, 0.4f });
+            phongShader->setVec3f("dirLight.specular", { 0.5f, 0.5f, 0.5f });
 
-            phongShader->setFloat("light.constant", 1.0f);
-            phongShader->setFloat("light.linear", 0.09f);
-            phongShader->setFloat("light.quadratic", 0.032f);
+//            // point light 1
+            phongShader->setVec3f("pointLights[0].position", pointLightPositions[0]);
+            phongShader->setVec3f("pointLights[0].ambient", {0.05f, 0.05f, 0.05f});
+            phongShader->setVec3f("pointLights[0].diffuse", {0.8f, 0.8f, 0.8f});
+            phongShader->setVec3f("pointLights[0].specular", {1.0f, 1.0f, 1.0f});
+            phongShader->setFloat("pointLights[0].constant", 1.0f);
+            phongShader->setFloat("pointLights[0].linear", 0.09f);
+            phongShader->setFloat("pointLights[0].quadratic", 0.032f);
+            // point light 2
+            phongShader->setVec3f("pointLights[1].position", pointLightPositions[1]);
+            phongShader->setVec3f("pointLights[1].ambient", {0.05f, 0.05f, 0.05f});
+            phongShader->setVec3f("pointLights[1].diffuse", {0.8f, 0.8f, 0.8f});
+            phongShader->setVec3f("pointLights[1].specular", {1.0f, 1.0f, 1.0f});
+            phongShader->setFloat("pointLights[1].constant", 1.0f);
+            phongShader->setFloat("pointLights[1].linear", 0.09f);
+            phongShader->setFloat("pointLights[1].quadratic", 0.032f);
+            // point light 3
+            phongShader->setVec3f("pointLights[2].position", pointLightPositions[2]);
+            phongShader->setVec3f("pointLights[2].ambient", {0.05f, 0.05f, 0.05f});
+            phongShader->setVec3f("pointLights[2].diffuse", {0.8f, 0.8f, 0.8f});
+            phongShader->setVec3f("pointLights[2].specular", {1.0f, 1.0f, 1.0f});
+            phongShader->setFloat("pointLights[2].constant", 1.0f);
+            phongShader->setFloat("pointLights[2].linear", 0.09f);
+            phongShader->setFloat("pointLights[2].quadratic", 0.032f);
+            // point light 4
+            phongShader->setVec3f("pointLights[3].position", pointLightPositions[3]);
+            phongShader->setVec3f("pointLights[3].ambient", {0.05f, 0.05f, 0.05f});
+            phongShader->setVec3f("pointLights[3].diffuse", {0.8f, 0.8f, 0.8f});
+            phongShader->setVec3f("pointLights[3].specular", {1.0f, 1.0f, 1.0f});
+            phongShader->setFloat("pointLights[3].constant", 1.0f);
+            phongShader->setFloat("pointLights[3].linear", 0.09f);
+            phongShader->setFloat("pointLights[3].quadratic", 0.032f);
+            // spotLight
+            phongShader->setVec3f("spotLight.position", camera.Position);
+            phongShader->setVec3f("spotLight.direction", camera.Front);
+            phongShader->setVec3f("spotLight.ambient", {0.0f, 0.0f, 0.0f});
+            phongShader->setVec3f("spotLight.diffuse", {1.0f, 1.0f, 1.0f});
+            phongShader->setVec3f("spotLight.specular", {1.0f, 1.0f, 1.0f});
+            phongShader->setFloat("spotLight.constant", 1.0f);
+            phongShader->setFloat("spotLight.linear", 0.09f);
+            phongShader->setFloat("spotLight.quadratic", 0.032f);
+            phongShader->setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+            phongShader->setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 
-            phongShader->setVec3f("light.position", camera.Position);
-            phongShader->setVec3f("light.direction", camera.Front);
-            phongShader->setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
-            phongShader->setFloat("light.outerCutOff", glm::cos(glm::radians(15.0f)));
             phongShader->setVec3f("cameraPosition", camera.Position);
-            phongShader->setMat4f("model", model);
             phongShader->setMat4f("view", view);
             phongShader->setMat4f("projection", projection);
-            phongShader->setMat4f("mvp", projection * view * model);
-            phongShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
 
+            glBindVertexArray(cubeVAO);
+            for (int i = 0; i < cubePositions.size(); ++i) {
+                glm::mat4 model(1.0f);
+                model = glm::translate(model, cubePositions[i]);
 
-            glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+                phongShader->setMat4f("model", model);
+                phongShader->setMat4f("mvp", projection * view * model);
+                phongShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
+
+                glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+            }
         }
 
         {
@@ -191,6 +248,24 @@ void LearnGLApp::run() {
             lampShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
 
             glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+        }
+
+        {
+            for (int i = 0; i < pointLightPositions.size(); ++i) {
+                glBindVertexArray(lightVAO);
+                glm::mat4 model(1.0f);
+                model = glm::translate(model, pointLightPositions[i]);
+                model = glm::scale(model, glm::vec3(0.1f));
+
+                lampShader->use();
+                lampShader->setMat4f("model", model);
+                lampShader->setMat4f(("view"), view);
+                lampShader->setMat4f("projection", projection);
+                lampShader->setMat4f("mvp", projection * view * model);
+                lampShader->setMat3f("normalMatrix", glm::transpose(glm::inverse(model)));
+
+                glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+            }
         }
 
         // Do the framebuffer swappy thing

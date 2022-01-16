@@ -35,6 +35,8 @@ class LearnGLApp : public BaseApp {
     std::shared_ptr<Shader> lampShader;
 
     glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
+    std::vector<glm::vec3> pointLightPositions;
+    std::vector<glm::vec3> cubePositions;
 
 public:
     void extracted();
